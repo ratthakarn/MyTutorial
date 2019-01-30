@@ -48,14 +48,20 @@ public class ServiceActivity extends AppCompatActivity {
     }
 
     private void createToolbar() {
-        Toolbar toolbar = findViewById(R.id.toobarService);
-        setSupportActionBar(toolbar);
+        try {
 
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-        String displayName = firebaseUser.getDisplayName();
+            Toolbar toolbar = findViewById(R.id.toobarService);
+            setSupportActionBar(toolbar);
 
-        getSupportActionBar().setSubtitle(displayName + " Use");
+            FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+            FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+            String displayName = firebaseUser.getDisplayName();
+
+            getSupportActionBar().setSubtitle(displayName + " Use");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
