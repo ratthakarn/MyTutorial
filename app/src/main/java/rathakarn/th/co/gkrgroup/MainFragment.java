@@ -1,6 +1,7 @@
 package rathakarn.th.co.gkrgroup;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 
 /**
@@ -25,7 +28,21 @@ public class MainFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+//        Check Status
+
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        if (firebaseAuth != null) {
+            startActivity(new Intent(getActivity(), ServiceActivity.class));
+
+        }
+
+
 //        Register Controller
+        registerController();
+
+    }  // Main Method
+
+    private void registerController() {
         TextView textView = getView().findViewById(R.id.txtRegister);
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,8 +52,7 @@ public class MainFragment extends Fragment {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.contentMainFragment, new RegisterFragment()).addToBackStack(null).commit();
             }
         });
-
-    }  // Main Method
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
